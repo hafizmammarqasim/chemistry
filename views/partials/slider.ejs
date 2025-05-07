@@ -1,0 +1,45 @@
+<div class="slider-container">
+  <div class="slider-controls">
+    <button id="prev-btn" class="control-btn" aria-label="Previous question">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div id="progress-fill"></div>
+      </div>
+      <div class="question-counter">
+        <span id="current-question">1</span>/<span id="total-questions"><%= questionsAnswers.length %></span>
+      </div>
+    </div>
+    <button id="next-btn" class="control-btn" aria-label="Next question">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <div class="slider">
+    <div class="slides-container" id="slides-container">
+      <% questionsAnswers.forEach((qa, index) => { %>
+        <div class="slide <%= index === 0 ? 'active' : '' %>" data-id="<%= qa.id %>">
+          <div class="card">
+            <div class="card-front">
+              <div class="question-number">Question <%= qa.id %></div>
+              <h2><%= qa.question %></h2>
+              <button class="reveal-btn">Reveal Answer</button>
+            </div>
+            <div class="card-back">
+              <div class="answer-label">Answer</div>
+              <p><%= qa.answer %></p>
+              <button class="back-to-question-btn">Back to Question</button>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+
+  <div class="slider-dots">
+    <% questionsAnswers.forEach((_, index) => { %>
+      <button class="dot <%= index === 0 ? 'active' : '' %>" data-index="<%= index %>" aria-label="Go to question <%= index + 1 %>"></button>
+    <% }) %>
+  </div>
+</div>
